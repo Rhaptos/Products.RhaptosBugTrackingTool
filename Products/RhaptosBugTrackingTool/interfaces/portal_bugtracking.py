@@ -3,12 +3,8 @@
 
 """ Bug Tracking interface"""
 
-from Interface import Attribute
-try:
-    from Interface import Interface
-except ImportError:
-    # for Zope versions before 2.6.0
-    from Interface import BugTracking as Interface
+from zope.interface import Attribute
+from zope.interface import Interface
 
 class portal_bugtracking(Interface):
     """Defines an interface for a tool that submits bugs to a bugtracking system"""

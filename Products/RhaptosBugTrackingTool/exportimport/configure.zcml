@@ -1,0 +1,12 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:five="http://namespaces.zope.org/five">
+
+  <adapter
+     factory=".tool.BugTrackingToolXMLAdapter"
+     provides="Products.GenericSetup.interfaces.IBody"
+     for="..interfaces.portal_bugtracking.portal_bugtracking
+          Products.GenericSetup.interfaces.ISetupEnviron"
+     />
+
+</configure>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<import-steps>
+  <import-step id="rhaptos-bugtracker" version="20090923-01"
+      handler="Products.RhaptosBugTrackingTool.exportimport.tool.importBugTrackingTool"
+      title="Import bug tracking tool.">
+    <dependency step="toolset"/>
+    Import bug tracking tool.
+  </import-step>
+</import-steps>
