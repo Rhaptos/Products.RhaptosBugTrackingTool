@@ -1,0 +1,10 @@
+BugTrackingTool-0.1.2
+  - enable email notification for new tickets
+  - fix error that occurs when there's an email but no name
+
+BugTrackingTool-0.1.1
+  - Backed out name/email/cc workaround
+  - Removed hardcoded default component
+
+BugTrackingTool-0.1
+  - Initial release
