@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------#
-#   __init__.py                                                                #
+#   test_rhaptos_bug_tracking_tool.py                                          #
 #                                                                              #
 #       Authors:                                                               #
 #       Rajiv Bakulesh Shah <raj@enfoldsystems.com>                            #
@@ -19,6 +19,22 @@
 #                   www.enfoldsystems.com                                      #
 #                   info@enfoldsystems.com                                     #
 #------------------------------------------------------------------------------#
-"""Required file to identify this directory as a Python package.
+"""Unit tests.
 $Id: $
 """
+
+
+from Products.PloneTestCase import PloneTestCase
+
+import patch_zope_testing
+
+
+_PRODUCTS = ('Products.RhaptosBugTrackingTool',)
+_PROFILES = ('Products.RhaptosBugTrackingTool',)
+PloneTestCase.setupPloneSite(products=_PRODUCTS, extension_profiles=_PROFILES)
+
+
+class TestRhaptosBugTrackingTool(PloneTestCase.PloneTestCase):
+
+    def test_fail(self):
+        pass

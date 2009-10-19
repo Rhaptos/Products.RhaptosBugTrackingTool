@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------#
-#   __init__.py                                                                #
+#   patch_zope_testing.py                                                      #
 #                                                                              #
 #       Authors:                                                               #
 #       Rajiv Bakulesh Shah <raj@enfoldsystems.com>                            #
@@ -19,6 +19,17 @@
 #                   www.enfoldsystems.com                                      #
 #                   info@enfoldsystems.com                                     #
 #------------------------------------------------------------------------------#
-"""Required file to identify this directory as a Python package.
+"""Monkey patch for zope.testing to get it to properly format exceptions.
 $Id: $
 """
+
+
+import zope.exceptions
+
+def format_exception(t, v, tb, limit=None):
+    fmt = zope.exceptions.exceptionformatter.TextExceptionFormatter(
+        limit=None)
+    return fmt.formatException(t, v, tb)
+
+from zope.testing.testrunner import tb_format
+tb_format.format_exception = format_exception

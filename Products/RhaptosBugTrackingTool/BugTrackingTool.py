@@ -14,7 +14,7 @@ from Products.CMFCore.utils import UniqueObject
 from OFS.SimpleItem import SimpleItem
 from Globals import InitializeClass
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
-from Products.CMFCore.CMFCorePermissions import ManagePortal
+from Products.CMFCore.permissions import ManagePortal
 from interfaces.portal_bugtracking import portal_bugtracking as IBugTrackingTool
 from OFS.PropertyManager import PropertyManager
 
