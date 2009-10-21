@@ -16,12 +16,13 @@ from Globals import InitializeClass
 from Products.PageTemplates.PageTemplateFile import PageTemplateFile
 from Products.CMFCore.permissions import ManagePortal
 from interfaces.portal_bugtracking import portal_bugtracking as IBugTrackingTool
+from zope.interface import implements
 from OFS.PropertyManager import PropertyManager
 
 
 class BugTrackingTool(UniqueObject, SimpleItem, PropertyManager):
 
-    __implements__ = (IBugTrackingTool)
+    implements(IBugTrackingTool)
 
     id = 'portal_bugtracking'
     meta_type = 'BugTracking Tool'
