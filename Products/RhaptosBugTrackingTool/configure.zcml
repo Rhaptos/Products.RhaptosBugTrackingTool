@@ -11,7 +11,7 @@
 
   <genericsetup:registerProfile
       name="default"
-      title="ProductsRhaptosBugTrackingTool"
+      title="Products.RhaptosBugTrackingTool"
       directory="profiles/default"
       description="Extension profile for Products.RhaptosBugTrackingTool."
       provides="Products.GenericSetup.interfaces.EXTENSION"
