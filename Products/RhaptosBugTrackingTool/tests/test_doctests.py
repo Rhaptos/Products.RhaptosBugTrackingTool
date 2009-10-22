@@ -10,7 +10,7 @@ from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase.layer import PloneSite
 
 # Set up a Plone site, and apply our custom extension profile
-PROFILES = ('Products.RhaptosBugTrackingTool',)
+PROFILES = ('Products.RhaptosBugTrackingTool:default',)
 ptc.setupPloneSite(extension_profiles=PROFILES)
 
 import Products.RhaptosBugTrackingTool

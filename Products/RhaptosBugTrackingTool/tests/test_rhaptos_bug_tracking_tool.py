@@ -23,18 +23,38 @@
 $Id: $
 """
 
-
-from Products.PloneTestCase import PloneTestCase
-
 import patch_zope_testing
 
+from Testing import ZopeTestCase
 
-_PRODUCTS = ('Products.RhaptosBugTrackingTool',)
-_PROFILES = ('Products.RhaptosBugTrackingTool',)
-PloneTestCase.setupPloneSite(products=_PRODUCTS, extension_profiles=_PROFILES)
+from Products.CMFPlone.tests import PloneTestCase
+from Products.PloneTestCase.layer import PloneSite
 
+from Products.Five import zcml
+from Products.Five import fiveconfigure
+
+import Products.RhaptosBugTrackingTool
 
 class TestRhaptosBugTrackingTool(PloneTestCase.PloneTestCase):
 
-    def test_fail(self):
+    class layer(PloneSite):
+        @classmethod
+        def setUp(cls):
+            fiveconfigure.debug_mode = True
+            zcml.load_config('configure.zcml', Products.RhaptosBugTrackingTool)
+            ZopeTestCase.installProduct('RhaptosBugTrackingTool')
+            fiveconfigure.debug_mode = False
+
+        @classmethod
+        def tearDown(cls):
+            pass
+
+    def test_fake(self):
         pass
+
+def test_suite():
+    from unittest import TestSuite, makeSuite
+    suite = TestSuite()
+    suite.addTest(makeSuite(TestRhaptosBugTrackingTool))
+    return suite
+
