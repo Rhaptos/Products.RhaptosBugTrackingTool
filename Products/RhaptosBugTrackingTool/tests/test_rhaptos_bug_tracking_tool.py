@@ -24,9 +24,9 @@ $Id: $
 """
 
 
-import base
-
 import Products.RhaptosBugTrackingTool
+
+from Products.RhaptosTest import base
 
 
 base.PRODUCTS_TO_LOAD_ZCML = [('configure.zcml', Products.RhaptosBugTrackingTool),]
