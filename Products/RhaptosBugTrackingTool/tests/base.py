@@ -1,5 +1,5 @@
 #------------------------------------------------------------------------------#
-#   test_rhaptos_bug_tracking_tool.py                                          #
+#   base.py                                                                    #
 #                                                                              #
 #       Authors:                                                               #
 #       Rajiv Bakulesh Shah <raj@enfoldsystems.com>                            #
@@ -19,28 +19,37 @@
 #                   www.enfoldsystems.com                                      #
 #                   info@enfoldsystems.com                                     #
 #------------------------------------------------------------------------------#
-"""Unit tests.
+"""Base class from which other Rhaptos unit test classes inherit.
 $Id: $
 """
 
 
-import base
+import patch_zope_testing
 
-import Products.RhaptosBugTrackingTool
-
-
-base.PRODUCTS_TO_LOAD_ZCML = [('configure.zcml', Products.RhaptosBugTrackingTool),]
-base.PRODUCTS_TO_INSTALL = ['RhaptosBugTrackingTool',]
-
-
-class TestRhaptosBugTrackingTool(base.RhaptosTestCase):
-
-    def test_pass(self):
-        assert 1 == 1
+from Products.CMFPlone.tests import PloneTestCase
+from Products.Five import fiveconfigure
+from Products.Five import zcml
+from Products.PloneTestCase.layer import PloneSite
+from Testing import ZopeTestCase
 
 
-def test_suite():
-    from unittest import TestSuite, makeSuite
-    suite = TestSuite()
-    suite.addTest(makeSuite(TestRhaptosBugTrackingTool))
-    return suite
+PRODUCTS_TO_LOAD_ZCML = []
+PRODUCTS_TO_INSTALL = []
+
+
+class RhaptosTestCase(PloneTestCase.PloneTestCase):
+
+    class layer(PloneSite):
+
+        @classmethod
+        def setUp(cls):
+            fiveconfigure.debug_mode = True
+            for zcml_file, product in PRODUCTS_TO_LOAD_ZCML:
+                zcml.load_config(zcml_file, product)
+            for product in PRODUCTS_TO_INSTALL:
+                ZopeTestCase.installProduct(product)
+            fiveconfigure.debug_mode = False
+
+        @classmethod
+        def tearDown(cls):
+            pass
