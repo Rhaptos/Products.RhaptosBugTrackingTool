@@ -51,6 +51,18 @@ class TestRhaptosBugTrackingTool(base.RhaptosTestCase):
         self.assertEqual(portal_bugtracking.id, 'portal_bugtracking')
         self.assertEqual(portal_bugtracking.meta_type, 'BugTracking Tool')
 
+    def test_bug_submission(self):
+        from Products.RhaptosBugTrackingTool.BugTrackingTool import BugTrackingTool
+        portal_bugtracking = BugTrackingTool()
+        summary = 'test'
+        email = 'billg@microsoft.com'
+        try:
+            bug_id = portal_bugtracking.submitBug(summary, email)
+        except ValueError:
+            pass
+        else:
+            self.fail('trac_xmlrpc not configured, but ValueError not raised on bug creation')
+
 
 def test_suite():
     from unittest import TestSuite, makeSuite
