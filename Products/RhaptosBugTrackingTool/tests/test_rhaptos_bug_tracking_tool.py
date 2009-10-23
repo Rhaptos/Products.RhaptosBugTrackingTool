@@ -45,6 +45,12 @@ class TestRhaptosBugTrackingTool(base.RhaptosTestCase):
         from Products.RhaptosBugTrackingTool.BugTrackingTool import BugTrackingTool
         self.assertTrue(verifyClass(Interface, BugTrackingTool))
 
+    def test_bug_tracking_tool(self):
+        from Products.RhaptosBugTrackingTool.BugTrackingTool import BugTrackingTool
+        portal_bugtracking = BugTrackingTool()
+        self.assertEqual(portal_bugtracking.id, 'portal_bugtracking')
+        self.assertEqual(portal_bugtracking.meta_type, 'BugTracking Tool')
+
 
 def test_suite():
     from unittest import TestSuite, makeSuite
