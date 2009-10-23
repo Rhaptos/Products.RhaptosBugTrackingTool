@@ -30,7 +30,7 @@ from Products.RhaptosTest import base
 
 
 base.PRODUCTS_TO_LOAD_ZCML = [('configure.zcml', Products.RhaptosBugTrackingTool),]
-base.PRODUCTS_TO_INSTALL = ['RhaptosBugTrackingTool',]
+base.PRODUCTS_TO_INSTALL = ['Products.RhaptosBugTrackingTool',]
 
 
 class TestRhaptosBugTrackingTool(base.RhaptosTestCase):
