@@ -38,6 +38,13 @@ class TestRhaptosBugTrackingTool(base.RhaptosTestCase):
     def test_pass(self):
         assert 1 == 1
 
+    def test_interface(self):
+        """Make sure the interfaces are correctly being implemented."""
+        from zope.interface.verify import verifyClass
+        from zope.interface import Interface
+        from Products.RhaptosBugTrackingTool.BugTrackingTool import BugTrackingTool
+        self.assertTrue(verifyClass(Interface, BugTrackingTool))
+
 
 def test_suite():
     from unittest import TestSuite, makeSuite
