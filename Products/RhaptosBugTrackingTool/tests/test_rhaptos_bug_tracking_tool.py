@@ -24,17 +24,21 @@ $Id: $
 """
 
 
+from Products.RhaptosTest import config
 import Products.RhaptosBugTrackingTool
+config.products_to_load_zcml = [('configure.zcml', Products.RhaptosBugTrackingTool),]
+config.products_to_install = ['RhaptosBugTrackingTool']
 
-from Products.RhaptosTest.base import RhaptosTestCase
+from Products.RhaptosTest import base
 
 
-class TestRhaptosBugTrackingTool(RhaptosTestCase):
+class TestRhaptosBugTrackingTool(base.RhaptosTestCase):
 
-    products_to_load_zcml = [('configure.zcml', Products.RhaptosBugTrackingTool),]
+    def afterSetUp(self):
+        pass
 
-    def setUp(self):
-        RhaptosTestCase.setUp(self)
+    def beforeTearDown(self):
+        pass
 
     def test_bug_tracking_tool(self):
         self.assertEqual(1, 1)
