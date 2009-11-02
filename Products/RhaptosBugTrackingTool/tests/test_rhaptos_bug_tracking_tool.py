@@ -47,6 +47,24 @@ class TestRhaptosBugTrackingTool(base.RhaptosTestCase):
         # Make sure that the bug tracker implements the expected interface.
         self.failUnless(IBugTrackingTool.isImplementedBy(self.bug_tracker))
 
+    def test_demonstrate_empty_description_bug(self):
+        # I've discovered a potential bug in this product.  This test is
+        # intended to demonstrate that bug.
+        #
+        # Whenever we submit a bug report without a description, from somewhere
+        # deep within the bowels, an exception is raised.  Here are some ideas
+        # for a potential fix:
+        #   - Make "description" a non-keyword (required) argument.
+        #   - Keep "description" a keyword argument, but give it a sane default
+        #     value, like ''.
+        #   - Explicitly test "description" for a string value.
+        #
+        # This entire exercise may be a non-issue, as there may be no code path
+        # by which "description" doesn't get populated with a string.
+        summary = 'Hello, World!'
+        email = 'raj@enfoldsystems.com'
+        self.assertRaises(TypeError, self.bug_tracker.submitBug, summary, email)
+
     def test_bug_tracker_submit_bug(self):
         # FIXME:  I'm commenting out this test, because it actually creates
         # bugs in the Rhaptos Trac bug tracker.  Maybe it'd be useful to set up
