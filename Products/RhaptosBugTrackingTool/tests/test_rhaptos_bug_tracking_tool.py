@@ -30,18 +30,36 @@ config.products_to_load_zcml = [('configure.zcml', Products.RhaptosBugTrackingTo
 config.products_to_install = ['RhaptosBugTrackingTool']
 config.extension_profiles = ['Products.RhaptosBugTrackingTool:default']
 
+from Products.CMFCore.utils import getToolByName
+from Products.RhaptosBugTrackingTool.interfaces.portal_bugtracking import portal_bugtracking as IBugTrackingTool
 from Products.RhaptosTest import base
 
 
 class TestRhaptosBugTrackingTool(base.RhaptosTestCase):
 
     def afterSetUp(self):
-        pass
+        self.bug_tracker = getToolByName(self.getPortal(), 'portal_bugtracking')
 
     def beforeTearDown(self):
         pass
 
-    def test_bug_tracking_tool(self):
+    def test_bug_tracker_interface(self):
+        # Make sure that the bug tracker implements the expected interface.
+        self.failUnless(IBugTrackingTool.isImplementedBy(self.bug_tracker))
+
+    def test_bug_tracker_submit_bug(self):
+        # FIXME:  I'm commenting out this test, because it actually creates
+        # bugs in the Rhaptos Trac bug tracker.  Maybe it'd be useful to set up
+        # a dummy Trac bug tracker only for testing purposes?  In any case,
+        # currently, this tests passes...
+        """
+        summary = 'Hello, World!'
+        email = 'raj@enfoldsystems.com'
+        description = 'Hello, World!'
+        id = self.bug_tracker.submitBug(summary, email, description=description)
+        """
+
+    def test_bug_tracker(self):
         self.assertEqual(1, 1)
 
 
