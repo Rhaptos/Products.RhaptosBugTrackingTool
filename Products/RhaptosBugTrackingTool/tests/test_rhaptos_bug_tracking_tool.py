@@ -28,6 +28,7 @@ from Products.RhaptosTest import config
 import Products.RhaptosBugTrackingTool
 config.products_to_load_zcml = [('configure.zcml', Products.RhaptosBugTrackingTool),]
 config.products_to_install = ['RhaptosBugTrackingTool']
+config.extension_profiles = ['Products.RhaptosBugTrackingTool:default']
 
 from Products.RhaptosTest import base
 
