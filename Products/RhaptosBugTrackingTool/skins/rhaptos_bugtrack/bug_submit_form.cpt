@@ -25,7 +25,7 @@
         can be found in our
         <span i18n:name="technology_link">
         <a href="http:/technology/browsers/"
-            tal:attributes="href python:here.portal_url()+'/technology/browsers'"
+            tal:attributes="href python:here.portal_url()+'/help/techsupport/browsers'"
             i18n:translate="label_technology_pages_link">technology pages</a></span>.</p>
       <p i18n:translate="text_bugsubmit_advanced" tal:condition="exists:context/portal_bugtracking/trac_url"
         tal:define="trac_url context/portal_bugtracking/trac_url | nothing">

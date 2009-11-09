@@ -1,3 +1,7 @@
+RhaptosBugTrackingTool-0.1.3
+  - collection-structure-redesign-1 (Oct. 22, 2009)
+    - change and (mostly) make dynamic help links for new help area structure
+
 BugTrackingTool-0.1.2
   - enable email notification for new tickets
   - fix error that occurs when there's an email but no name
