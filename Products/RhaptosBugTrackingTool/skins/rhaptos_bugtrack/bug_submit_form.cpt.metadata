@@ -1,0 +1,9 @@
+[default]
+title=Create Problem Report
+
+[validators]
+validators = validate_bug
+
+[actions]
+action.success = traverse_to:string:bug_edit
+action.failure = traverse_to:string:bug_submit_form

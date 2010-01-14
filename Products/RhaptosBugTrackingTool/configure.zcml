@@ -1,0 +1,21 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup">
+
+  <include package=".exportimport" />
+
+  <five:implements
+    class=".BugTrackingTool.BugTrackingTool"
+    interface=".interfaces.portal_bugtracking.portal_bugtracking"/>
+
+  <genericsetup:registerProfile
+      name="default"
+      title="Products.RhaptosBugTrackingTool"
+      directory="profiles/default"
+      description="Extension profile for Products.RhaptosBugTrackingTool."
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
+</configure>
+

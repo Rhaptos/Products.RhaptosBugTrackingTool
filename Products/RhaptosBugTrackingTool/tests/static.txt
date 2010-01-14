@@ -1,0 +1,15 @@
+Static Implementation Tests
+===========================
+ 	
+Let's just make sure that our static views are working as expected.
+	
+The first thing we need to do is to make sure the interfaces are
+being correctly implemented::
+ 	
+    >>> from zope.interface.verify import verifyClass
+ 	
+    >>> from Products.RhaptosBugTrackingTool.interfaces.portal_bugtracking import portal_bugtracking as IBugTrackingTool
+    >>> from Products.RhaptosBugTrackingTool.BugTrackingTool import BugTrackingTool
+    >>> from zope.interface import Interface
+    >>> verifyClass(Interface, BugTrackingTool)
+    True

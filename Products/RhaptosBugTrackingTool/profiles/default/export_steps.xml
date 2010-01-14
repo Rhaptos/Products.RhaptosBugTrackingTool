@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<export-steps>
+  <export-step id="rhaptos-bugtracker" version="20090923-01"
+      handler="Products.RhaptosBugTrackingTool.exportimport.tool.exportBugTrackingTool"
+      title="Import bug tracking tool.">
+    Export bug tracking tool.
+  </export-step>
+ 
+</export-steps>

@@ -1,0 +1,191 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"
+  xmlns:metal="http://xml.zope.org/namespaces/metal"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  metal:use-macro="here/main_template/macros/master"
+  i18n:domain="rhaptos" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+
+
+  
+  <metal:block fill-slot="top_slot"
+    tal:define="dummy python:request.set('disable_border',1)" />
+
+  <body>
+    
+    <div metal:fill-slot="main" tal:define="errors options/state/getErrors">
+      
+      <h1 i18n:translate="header_bugsumbmit_create">
+        Create a Problem Report
+      </h1>
+      <p i18n:translate="text_bugsubmit_explain">
+        <span i18n:name="portal_title" tal:replace="portal_title"/>
+        wants to hear of any problems you experience. Please let us
+        know what specifically is happening to you, and what type of
+        system you have. Feel free to give us your ideas about how to
+        make the site better. More information on browser-based issues
+        can be found in our
+        <span i18n:name="technology_link">
+        <a href="http:/technology/browsers/"
+            tal:attributes="href python:here.portal_url()+'/help/techsupport/browsers'"
+            i18n:translate="label_technology_pages_link">technology pages</a></span>.</p>
+      <p i18n:translate="text_bugsubmit_advanced" tal:condition="exists:context/portal_bugtracking/trac_url"
+        tal:define="trac_url context/portal_bugtracking/trac_url | nothing">
+        For more advanced options while entering your problem go directly to the 
+        <a tal:attributes="href trac_url">bug tracking system.</a></p>
+		
+      <form class="bug" action="" name="bugs" method="post"
+        tal:attributes="action template/getId">
+        
+        <fieldset tal:define="member python:here.portal_membership.getAuthenticatedMember();
+          contentUrl request/HTTP_REFERER | nothing">
+          <legend i18n:translate="legend_bugsubmit_properties">Problem Report Properties
+          </legend>
+          
+          <div class="field"
+            tal:define="error errors/summary | nothing;
+            summary request/summary | nothing;"
+            tal:attributes="class python:test(error, 'field error', 'field')">
+            
+            <label i18n:translate="label_bugsubmit_summary">Summary</label> 
+            <span
+              class="fieldRequired" title="Required"
+              i18n:attributes="summary value_required"
+              i18n:translate="label_required">(Required)</span>
+            
+            <div class="formHelp" i18n:translate="help_bugsubmit_summaryexplain">
+              Enter a short one line summary of the problem.</div>
+            
+            <div i18n:translate="" tal:content="error">Validation error output</div>
+            
+            <input type="text" name="summary" size="40" tabindex=""
+              tal:attributes="value summary;
+              tabindex tabindex/next;" />
+          </div>
+          <div class="field"
+            tal:define="error errors/name | nothing;
+            name request/name | nothing;"
+            tal:attributes="class python:test(error, 'field error', 'field')">
+            
+            <label i18n:translate="label_bugsubmit_name">Your Name</label>            
+            <div i18n:translate="" tal:content="error">Validation error output</div>
+            
+            <input
+              tal:define="fullname python:member.getProperty('fullname') or None"
+              type="text" name="name" size="40" tabindex=""
+              tal:attributes="value python:test(isAnon, '', fullname);
+					                    tabindex tabindex/next;" />
+          </div>
+          <div class="field"
+            tal:define="error errors/email | nothing;
+            email request/email | nothing;"
+            tal:attributes="class python:test(error, 'field error', 'field')">
+            
+            <label i18n:translate="label_bugsubmit_email">Your Email Address</label>
+            
+            <div class="formHelp" i18n:translate="help_bugsubmit_emailexplain">
+              Example: jdoe@example.com</div>
+            
+            <div i18n:translate="" tal:content="error">Validation error output</div>
+            
+            <input
+              tal:define="email python:member.getProperty('email') or None"
+              name="email" size="40" tabindex=""
+              tal:attributes="value python:test(isAnon, '', email);
+              tabindex tabindex/next;" />
+          </div>
+          <div class="field"
+            tal:define="error errors/contentUrl | nothing"
+            tal:attributes="class python:test(error, 'field error', 'field')">
+            
+            <label i18n:translate="label_bugsubmit_url">Problem URL</label>
+            <div class="formHelp" i18n:translate="help_bugsubmit_urlexplain">
+              Enter the URL where the problem occured, or the title or ID of the problematic
+              content. The default is the page you most recently viewed.</div>
+            
+            <div i18n:translate="" tal:content="error">Validation error output</div>
+            
+            <input type="text" name="contentUrl" size="60" tabindex=""
+              tal:attributes="value contentUrl;
+              tabindex tabindex/next;" />
+          </div>
+          
+          <div class="row"
+            tal:define="error errors/bugType | nothing;
+            bugType request/bugType | nothing;"
+            tal:attributes="class python:test(error, 'field error', 'field')">
+            
+            <label i18n:translate="label_bugsubmit_type">Category</label>
+            
+            <div class="formHelp" i18n:translate="help_bugsubmit_typeexplain">
+              Tell us the type of problem you are experiencing.</div>
+            
+            <div i18n:translate="" tal:content="error">Validation error output</div>
+            
+            <select name="bugType" size="1" tabindex="" tal:attributes="tabindex tabindex/next">
+              <option value="Unknown" selected="selected">Unknown</option>
+              <option value="Content Display">Content Display</option>
+              <option value="Search/Browse">Search/Browse</option>
+              <option value="Content Printing">Content Printing</option>
+              <option value="Authoring">Authoring</option>
+              <option value="User Accounts">User Accounts</option>
+              <option value="Documentation">Documentation</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          
+          <div class="row"
+            tal:define="error errors/severity | nothing;
+            severity request/severity | nothing;"
+            tal:attributes="class python:test(error, 'field error', 'field')">
+            
+            <label i18n:translate="label_bugsubmit_severity">Severity</label>
+            
+            <div class="formHelp" i18n:translate="help_bugsubmit_severityexplain">
+              Let us know how severe this problem is to you.</div>
+            
+            <div i18n:translate="" tal:content="error">Validation error output</div>
+            
+            <select name="severity" size="1" tabindex="" tal:attributes="tabindex tabindex/next">
+              <option value="severe">Severe</option>
+              <option value="major">Major</option>
+              <option value="minor" selected="selected">Minor</option>
+              <option value="picky">Picky</option>
+            </select>
+          </div>
+          
+            
+          <div class="row"
+            tal:define="error errors/description | nothing;
+            description request/description | nothing;"
+            tal:attributes="class python:test(error, 'field error', 'field')">
+            
+            <label i18n:translate="label_bugsubmit_description">Description</label>
+            <span class="fieldRequired" title="Required"
+              i18n:attributes="summary value_required"
+              i18n:translate="label_required">(Required)</span>
+
+            
+            <div class="formHelp" i18n:translate="help_bugsubmit_describeexplain">
+              Enter a complete description of the problem.</div>
+            
+            <div i18n:translate="" tal:content="error">Validation error output</div>
+            
+            <textarea name="description" cols="40" rows="10" value="description"
+              tabindex="" tal:content="description"
+              tal:attributes="tabindex tabindex/next;">
+            </textarea>
+          </div>
+          
+          
+          <div class="formControls"><input class="context" type="submit"
+              tabindex="" name="form.button.Submit" value="Submit"
+              i18n:attributes="value value_create"
+              tal:attributes="tabindex tabindex/next;" /></div>
+          
+          <input type="hidden" name="form.submitted" value="1" />
+          <input type="hidden" name="referrer_url" tal:attributes="value contentUrl"/>
+        </fieldset>
+        
+      </form>
+    </div>
+  </body>
+</html>

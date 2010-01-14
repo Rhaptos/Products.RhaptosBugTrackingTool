@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<object name="portal_actions" meta_type="Plone Actions Tool">
+ <action-provider name="portal_actions">
+  <action title="Report a Bug" action_id="bugreport" category="site_actions"
+     condition_expr=""
+     url_expr="string:$portal_url/bug_submit_form" visible="True">
+   <permission>View</permission>
+  </action>
+ </action-provider>
+</object>
+
