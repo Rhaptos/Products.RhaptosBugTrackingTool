@@ -12,6 +12,11 @@ filename = 'rhaptos_bugtracker.xml'
 def importBugTrackingTool(context):
     portal = context.getSite()
     logger = context.getLogger('bugtracker')
+
+    if not hasattr(portal, 'portal_bugtracking'):
+        addTool = portal.manage_addProduct['RhaptosBugTrackingTool'].manage_addTool
+        addTool('BugTracking Tool')
+
     tool = getToolByName(portal, 'portal_bugtracking')
 
     body = context.readDataFile(filename)
