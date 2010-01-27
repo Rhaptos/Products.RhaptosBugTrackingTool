@@ -4,6 +4,8 @@ from zope.testing import doctestunit
 from zope.component import testing
 from Testing import ZopeTestCase as ztc
 
+ztc.installProduct('RhaptosBugTrackingTool')
+
 from Products.Five import zcml
 from Products.Five import fiveconfigure
 from Products.PloneTestCase import PloneTestCase as ptc
